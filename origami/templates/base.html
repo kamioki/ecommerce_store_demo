@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta name="description" content="NIPPON ORIGAMI delivers various origami products to all over the world">
+    <!-- Bootstrap Required Meta -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>NIPPON ORIGAMI</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<!-- Custom CSS -->
+<style type="text/css">
+html {scroll-behavior: smooth;}
+h2,h3{color:#57734A;margin-top:25px;padding-bottom:10px;}
+h2,.navbar-brand{font-weight:777;}
+h4{color:#756F55;}
+nav{background: #EBE9DA;}
+.alert{font-weight:bold;}
+.navbar img{margin-top:-5px;}
+.jumbotron{background:center / cover no-repeat url({{url_for('static', filename='img/header2.jpg')}});color:#EBE9DA;}
+.btn{background:#398793;border:none;}
+.btn-default{background:#ff7a00b8;color:#fff;margin-bottom:30px;}
+.btn-default:hover{background:#ff4b00;margin-bottom:30px;color:#fff;}
+.empty{background:none;border:1px solid #ddd;}
+.outer{min-width:300px;}
+.mycontents{max-width:980px;margin:auto;}
+#myTab{margin-top:30px;}
+.card-deck{margin-bottom:20px;}
+.upper{margin-bottom:5px;}
+.carousel{margin-bottom:50px;}
+.carousel-caption{background:rgba(45, 52, 60,0.9); position:absolute; bottom:0; left:0; width:100%;}
+footer{background:#EBE9DA;border-top:10px solid  #57734A;}
+</style>
+</head>
+
+<body>
+<div class="outer">
+<!-- Bootstrap Navbar -->
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <a class="navbar-brand" href="{{ url_for('main.index') }}">
+                <img src="{{url_for('static', filename='img/logo.png')}}" width="30" class="upper"
+                    alt="NIPPON ORIGAMI Logo">
+                NIPPON ORIGAMI
+            </a>
+
+              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+              <li class="nav-item active"><a class="nav-link" href="{{ url_for('main.index') }}">Home</a></li>
+              <li class="nav-item"><a class="nav-link" href="{{url_for('main.index', _anchor='categories_anchor')}}">Products</a></li>
+              <li class="nav-item"><a class="nav-link" href="{{url_for('main.order')}}"><img src="{{url_for('static', filename='img/cart.png')}}" width="20"> View Cart</a></li>
+              <li class="nav-item"><a class="nav-link" href="nopage.html">NoPage</a></li>
+              </ul>
+                        <!-- search box -->
+                        <form class="form-inline my-2 my-lg-0" action="{{url_for('main.search')}}">
+                            <input class="form-control" type="search" placeholder="Search" aria-label="Search" name="search">
+                            <button class="btn btn-primary btn-s my-0 ml-1" type="submit">Search</button>
+                        </form>
+            </div>
+        </nav>
+
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <div class="alert alert-danger" role="alert">
+            {% for message in messages %}
+                {{ message }}
+            {% endfor %}
+            </div>
+        {% endif %}
+        {% endwith %} 
+
+        {% block head %}{% endblock %}
+
+    </header>
+
+
+    <!-- main page content goes in container -->
+    
+    <div class="container-fluid">
+        <main>
+            {% block main %}{% endblock %}
+        </main>
+    </div>
+
+<!-- Footer -->
+</div>
+<footer class="text-center text-lg-start text-muted" id="contact">
+<section class="d-flex justify-content-center justify-content-lg-between p-2">
+    <div class="container text-center text-md-start mt-2">
+
+        <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mb-md-0 mb-2">
+          <h4 class="text-uppercase">Contact</h4>
+          <p>Tokyo, Japan<br>
+            info@example.com<br>
+         + 81 234 567 89</p>
+        </div>
+<!-- GoogleMaps -->
+<iframe src="https://www.google.com/maps/embed?pb=%211m18%211m12%211m3%211d1769.866932540282%212d153.02702597603235%213d-27.477543616066125%212m3%211f0%212f0%213f0%213m2%211i1024%212i768%214f13.1%213m3%211m2%211s0x0%3A0x0%212zMjfCsDI4JzM5LjIiUyAxNTPCsDAxJzQxLjIiRQ%215e0%213m2%211sen%212sjp%214v1621576419553%215m2%211sen%212sjp" style="border:0;" allowfullscreen="" loading="lazy" height="250" width="100%"></iframe>
+
+      </div>
+
+</section>
+
+  <div class="text-center p-4">
+    All rights belong to their respective owners.
+  </div>
+
+</footer>
+    <!-- Footer -->
+
+
+<!-- jQuery first, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" crossorigin="anonymous"></script>
+
+</body>
+</html>

@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block main %}
+    <h2 class="text-center">404 Error</h2>
+    <div class="mycontents">
+    <section>  
+        <div class="container">
+            <div class="row">
+    <p>
+        Sorry, but we cannot find what you are looking for. Please go back to Home.
+    
+    <img src="{{url_for('static', filename='img/header3.jpg')}}" class="d-block w-100" alt="...">
+    <br>
+    </p>
+    </div>
+    </div>
+    </div>
+{% endblock %}

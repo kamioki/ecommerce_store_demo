@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+
+{% block main %}
+
+<!-- display contents of user basket -->
+<section>  
+    <div class="container">
+            <h3 class="text-center"><img src="{{url_for('static', filename='img/cart.png')}}" width="40">&nbsp;&nbsp;Your Shopping Cart</h3>
+        <!-- each product on seperate row -->
+        {% for product in order.products %}
+            <div class="row shadow-md my-row mb-3">
+                <div class="col-sm-12 card">
+                    <h5 class="card-header">{{product.Category.name}} > {{product.name}}</h5>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-2">
+                                <img class="img-thumbnail" src="{{url_for('static', filename=('img/' + product.image))}}">
+                            </div>
+                            <div class="col-10">
+                                <!-- Item Description -->
+                                <p class="card-text">{{product.description}}</p>  
+                           <h5 class="text-right border-top">{{ "$%.2f"|format(product.price) }} (Qty: {{product.quantity}} piece)</h5>
+                        <form method="POST" action="{{url_for('main.deleteorderitem')}}">
+                            <input type="hidden" id="id" name="id" value="{{product.id}}">
+                            <input type="submit" value="Delete item" class="btn btn-primary mb-3 float-right" role="button">
+                        </form>
+                            </div>  
+                        </div>                      
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+        
+        <!-- total price and page controls -->
+        <section>
+        
+            <div class="mt-2 mb-4 text-right">
+                <h5 class="mt-4">Total Price = {{ "$%.2f"|format(totalprice) }}</h5>
+                <a href="{{ url_for('main.deleteorder') }}" class="btn btn-outline-secondary empty" role="button">Empty Cart</a>&nbsp;&nbsp;&nbsp;
+                <a href="{{ url_for('main.checkout') }}" class="btn btn-primary" role="button">
+                <img src="{{url_for('static', filename='img/cart.png')}}" width="20">&nbsp;&nbsp;Go to Checkout
+                </a>
+            </div>
+            
+        </section>
+    </div>
+</section>
+{% endblock %}
+

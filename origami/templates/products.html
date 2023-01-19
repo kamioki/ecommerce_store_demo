@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block main %}
+<div class="mycontents">
+<!-- display products for the specific category -->
+<section>
+
+            <h2 class="text-center">Select a product from below</h2>
+
+    <div class="card-columns">
+
+        {% for product in products%}
+        <div class="card">
+            <img class="card-img-top" src="{{url_for('static', filename='img/'+product.image)}}" alt="Card image">
+            <div class="card-body">
+                <h4 class="card-title">{{product.name}}</h4>
+                <p class="card-text">{{product.description}}</p>
+            </div>
+            <div class="card-footer"><strong>Price: {{ "$%.2f"|format(product.price) }}</strong>
+                <form action="{{ url_for('main.order') }}">
+                    <input type="hidden" id="product_id" name="product_id" value="{{ product.id }}">
+                    <input class="btn btn-primary" type="submit" value="Add to Basket">
+                </form>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+</section>
+{% endblock %}
+

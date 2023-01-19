@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block main %}
+<div class="mycontents">
+    <section>  
+        <div class="container">
+            <div class="row">
+                <div class = "col-12">
+                    <h2 class="text-center">Place Your Order Now!</h2>
+                    <p>
+                        Thank you for your order. Please confirm your order and enter shipping details so that we can complete your order. Arigato! 
+                    </p>
+                </div>
+            </div>
+            <div class="card">
+            <div class="card-header"><h5>You are ordering (Total Price {{ "$%.2f"|format(totalprice) }})</h5></div>
+  <div class="card-body">
+            <!-- display ordering products to confirm -->
+            <ol style="font-weight:bold;">
+        {% for product in order.products %}
+                <li><img class="img-thumbnail" src="{{url_for('static', filename=('img/' + product.image))}}" width="100">
+                {{product.name}}: {{ "$%.2f"|format(product.price) }}
+                </li>
+        {% endfor %}
+        </ol>
+        </div>
+        </div>
+        <!-- submission form -->
+        <p><br>* Required fields</p>
+            <div class="row">
+                <div class = "col-6">
+                    {{wtf.quick_form(form)}}
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
